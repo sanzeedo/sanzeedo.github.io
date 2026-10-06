@@ -77,3 +77,69 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 5px; border-ra
   .profile__links a { padding-block: 0; }
   .project__description > p { line-height: 20px; }
 }
+
+/* Link expansion follows the timing of the reference; colours match the mockup. */
+a:has(.link-arrow) {
+  display: inline-flex;
+  align-items: center;
+  padding: .125em 0;
+  margin-block: -.125em;
+  border-radius: .41em;
+  transition: background-color .5s, padding-inline .5s, color .3s, text-decoration-color .15s;
+}
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 0;
+  margin-inline-start: 0;
+  overflow: hidden;
+  opacity: 0;
+  line-height: 1;
+  text-decoration: none;
+  transition: opacity .2s, inline-size .5s, margin-inline-start .5s;
+}
+a:has(.link-arrow):focus-visible {
+  background-color: #00243b;
+  padding-inline: .25em;
+  color: var(--link);
+  text-decoration-color: transparent;
+  transition-duration: .15s;
+}
+a:focus-visible > .link-arrow {
+  inline-size: .74em;
+  margin-inline-start: .12em;
+  opacity: 1;
+  transition-duration: .15s;
+}
+@media (hover: hover) and (pointer: fine) {
+  a:has(.link-arrow):hover {
+    background-color: #00243b;
+    padding-inline: .25em;
+    color: var(--link);
+    text-decoration-color: transparent;
+    transition-duration: .15s;
+  }
+  a:hover > .link-arrow {
+    inline-size: .74em;
+    margin-inline-start: .12em;
+    opacity: 1;
+    transition-duration: .15s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  a:has(.link-arrow), .link-arrow { transition: none; }
+}
+
+.profile__links a:has(.link-arrow) {
+  transition: background-color .5s, padding-inline .5s, color .3s, text-decoration-color .15s, opacity .15s;
+}
+.profile__links:has(a:focus-visible) a:not(:focus-visible) { opacity: .5; }
+.profile__links a:has(.link-arrow):focus-visible { transition-duration: .15s; }
+@media (hover: hover) and (pointer: fine) {
+  .profile__links:has(a:hover) a:not(:hover) { opacity: .5; }
+  .profile__links a:has(.link-arrow):hover { opacity: 1; transition-duration: .15s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .profile__links a:has(.link-arrow) { transition: none; }
+}
