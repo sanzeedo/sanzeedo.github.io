@@ -73,5 +73,7 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 5px; border-ra
 }
 
 @media (max-width: 899px) {
+  .profile__links { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .profile__links a { padding-block: 0; }
   .project__description > p { line-height: 20px; }
 }
