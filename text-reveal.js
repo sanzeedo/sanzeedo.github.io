@@ -1,6 +1,6 @@
 (() => {
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  if (motion.matches || !Element.prototype.animate || !window.IntersectionObserver) return;
+  if (motion.matches || !Element.prototype.animate) return;
 
   const running = new Set();
   const seen = new WeakSet();
@@ -57,20 +57,11 @@
     });
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      reveal(entry.target);
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
-
   if (profile) reveal(profile);
-  descriptions.forEach((description) => observer.observe(description));
+  descriptions.forEach((description) => reveal(description));
   motion.addEventListener('change', () => {
     if (!motion.matches) return;
     running.forEach((animation) => animation.cancel());
     running.clear();
-    observer.disconnect();
   });
 })();

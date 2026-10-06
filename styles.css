@@ -52,8 +52,8 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 5px; border-ra
 
 @media (min-width: 900px) {
   .portfolio { grid-template-columns: minmax(0, 420fr) minmax(0, 620fr); gap: clamp(32px, calc(16vw - 112px), 80px); width: min(100% - 40px, 1120px); padding-block: 80px; }
-  /* Профиль остаётся на месте; следующие кейсы продолжают обычную прокрутку страницы. */
-  .profile { position: sticky; top: 80px; align-self: start; max-height: calc(100dvh - 104px); overflow-y: auto; scrollbar-width: none; }
+  /* Профиль закреплён без отдельной области прокрутки. */
+  .profile { position: sticky; top: 80px; align-self: start; overflow: visible; }
   .profile__photo { width: 100px; height: 100px; border-radius: 24px; }
   .profile__name { color: #666; font-size: 14px; line-height: 18px; }
   .profile__label { color: #4d4d4d; font-size: 14px; line-height: 18px; }
@@ -67,9 +67,9 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 5px; border-ra
   .project__heading { color: #4d4d4d; font-size: 14px; line-height: 18px; }
 }
 
-/* На низком экране весь профиль остаётся доступным для прокрутки. */
+/* На низком экране уменьшаем верхний отступ профиля. */
 @media (min-width: 900px) and (max-height: 680px) {
-  .profile { top: 24px; max-height: calc(100dvh - 48px); overflow-y: auto; scrollbar-width: none; }
+  .profile { top: 24px; overflow: visible; }
 }
 
 @media (max-width: 899px) {
@@ -144,8 +144,6 @@ a:focus-visible > .link-arrow {
   .profile__links a:has(.link-arrow) { transition: none; }
 }
 
-/* Hide the profile scrollbar while keeping its content reachable on short screens. */
-.profile::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
 /* Words retain their normal spacing; non-breaking spaces stay together. */
 .reveal-word { display: inline-block; }
